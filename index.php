@@ -7,15 +7,13 @@
  * 
  */
 
+ini_set ('display_errors', 1); 
+ini_set ('display_startup_errors', 1); 
+error_reporting (E_ALL);
+
 require 'Discordbot.php';
 
 $config = parse_ini_file("config.ini", true);
-
-if($config['app']['debug'] === true) {
-    ini_set ('display_errors', 1); 
-    ini_set ('display_startup_errors', 1); 
-    error_reporting (E_ALL);
-}
 
 if (class_exists('Discordbot')) {
     $discordBot = new Discordbot($config['app']['discordLink'], $config['app']['discordName']);
@@ -40,7 +38,7 @@ $url = "https://www.rdvsms.com/sms/smsApiLoadDispo.php?dateDebG={$datedebut_e}&d
 $json = file_get_contents($url);
 $data = json_decode($json, true);
 
-$dateHeureDuJour = $datedebut->format("Y-m-d H:i:s");
+$dateHeureDuJour = $datedebut->format("d/m/Y H:i:s");
 
 $embeds = [];
 foreach ($data as $day) {
@@ -59,7 +57,7 @@ if (!empty($embeds)) {
         "content" => "OphtalmoBot - Résultat du " . $dateHeureDuJour . "",
         "embeds" => array_merge([
             [
-                "title" => "OphtalmoBot - Résultat du " . $datedebut . " au " . $datefin . "",
+                "title" => "OphtalmoBot - Résultat du " . $datedebutStr . " au " . $datefinStr . "",
                 "description" => "Recherche des dates disponibles pour vous.",
                 "color" => 16751448
             ]
@@ -78,7 +76,7 @@ if (!empty($embeds)) {
         "content" => "OphtalmoBot - Résultat du " . $dateHeureDuJour,
         "embeds" => [
             [
-                "title" => "OphtalmoBot - Résultat du " . $datedebut . " au " . $datefin . "",
+                "title" => "OphtalmoBot - Résultat du " . $datedebutStr . " au " . $datefinStr . "",
                 "description" => "Aucun créneau disponible trouvé.",
                 "color" => 16711853
             ]
