@@ -1,0 +1,10 @@
+; Confiuration file for the API
+
+[app]
+debug       = false
+codeMedecin = 
+numMotif    = 
+lien        = 
+discordLink =
+discordName =
+
