@@ -1,12 +1,21 @@
 <?php
 
-// ini_set ('display_errors', 1); 
-// ini_set ('display_startup_errors', 1); 
-// error_reporting (E_ALL);
+/**
+ * Bot RDV
+ * 
+ * @autor: Simonet Fabrice | Emulsion.io
+ * 
+ */
 
 require 'Discordbot.php';
 
 $config = parse_ini_file("config.ini", true);
+
+if($config['app']['debug'] === true) {
+    ini_set ('display_errors', 1); 
+    ini_set ('display_startup_errors', 1); 
+    error_reporting (E_ALL);
+}
 
 if (class_exists('Discordbot')) {
     $discordBot = new Discordbot($config['app']['discordLink'], $config['app']['discordName']);
